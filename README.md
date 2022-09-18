@@ -3,7 +3,7 @@ Role Name
 
 **worker_nodes_k3s**
 
-Add any number of worker nodes an existing k3s cluster
+Add any number of worker nodes to an existing k3s cluster
 
 Requirements
 ------------
