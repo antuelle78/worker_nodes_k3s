@@ -14,8 +14,11 @@ Role Variables
 --------------
 
 **k3s_version**:
+
 **k3s_master_url**:
+
 **k3s_master_token**:
+
 
 Examples
 ----------------
