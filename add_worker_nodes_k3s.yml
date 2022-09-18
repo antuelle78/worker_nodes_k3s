@@ -1,0 +1,21 @@
+---
+
+- hosts: all
+  become: true
+  roles:
+    - add_worker_nodes_k3s
+  vars:
+    ansible_user: ghost
+  vars_prompt:
+
+    - name: k3s_version
+      prompt: Enter k3s version
+      default: v1.21.9+k3s1
+
+    - name: k3s_master_url
+      prompt: Enter k3s master server URL
+      default: https://192.168.1.49:6443
+
+    - name: k3s_master_token
+      prompt: Enter k3s token
+      default: K10cacb095fdc4b260eee140938b7119f005aea1504e107575d5bbe61a698ef5c0b::server:f838f9d206d150f28eab43ae0f0754d9

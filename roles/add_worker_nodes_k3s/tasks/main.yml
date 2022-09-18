@@ -1,0 +1,39 @@
+---
+# tasks file for add_worker_nodes_k3s
+
+- block:
+    - name: Make sure all packages are up to date ubuntu
+      ansible.builtin.apt:
+        name: '*'
+        state: latest
+        update_cache: true
+      ignore_errors: true
+      register: systemstatus
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Reboot system if needed
+      ansible.builtin.reboot:
+        reboot_timeout: 240
+      when: systemstatus is changed
+  tags:
+    - patchsys
+
+- name: Install k3s {{ k3s_version }}
+  ansible.builtin.shell: "curl -sfL https://get.k3s.io/ |
+    INSTALL_K3S_VERSION={'{{ k3s_version }}'}
+    K3S_URL={{ k3s_master_url }}
+    K3S_TOKEN={{ k3s_master_token }} sh -"
+  tags:
+    - k3s_install
+
+- name: Pause to allow cluster to fully initialize
+  ansible.builtin.pause:
+    minutes: 1
+  tags:
+    - k3s_install
+
+- name: Start and enable k3s agent
+  ansible.builtin.systemd:
+    name: k3s-agent
+    state: started
+    enabled: true
