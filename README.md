@@ -48,3 +48,5 @@ Author Information
 Name: Michael Nelson
 
 LET'S GET IT AUTOMATED AND BE LAZY :<)
+
+Just testing some texts with my new settings
