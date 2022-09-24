@@ -37,3 +37,6 @@
     name: k3s-agent
     state: started
     enabled: true
+
+
+# You can add extra tasks below
